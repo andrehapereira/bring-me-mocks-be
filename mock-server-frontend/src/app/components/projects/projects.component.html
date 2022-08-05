@@ -1,0 +1,77 @@
+<div class="p-4">
+    <div class="d-flex w-100 justify-content-between mb-3 ">
+        <h3>Projects</h3>
+        <div class="d-flex align-items-center">
+            <button mat-raised-button color="primary" class="d-flex align-items-center pointer" (click)="addNewProject()">
+                <mat-icon>add</mat-icon>
+                <span class="ms-3">Add new project</span>
+            </button>
+            <button mat-button color="accent" class="d-flex align-items-center pointer ms-4" (click)="import()">
+                <mat-icon>file_upload</mat-icon>
+                <span class="ms-2">Import</span>
+            </button>
+            <input #uploadBtn type="file" class="d-none" (change)="onFileUpload()" accept=".json"/>
+            <button mat-button color="secondary" class="d-flex align-items-center pointer ms-4" (click)="exportAll()">
+                <mat-icon>file_download</mat-icon>
+                <span class="ms-2">Export all</span>
+            </button>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="d-flex mt-4 card-container">
+        <ng-container *ngIf="!(loading$ | async); else loading">
+            <ng-container *ngIf="!(error$ | async); else error">
+                <ng-container *ngIf="!(isEmpty$ | async); else empty">
+                    <ng-container *ngFor="let project of projects$ | async">
+                        <div class="flip-card" feClassOnHover="flip">
+                            <mat-card class="mx-2 position-relative">
+                                <h5 class="flip-card-front mx-3">{{project | uppercase}}</h5>
+                                <div class="flip-card-back mx-3 justify-content-between">
+                                    <div class="d-flex flex-column w-100 h-100 justify-content-between align-items-center">
+                                        <h5>{{project | uppercase}}</h5>
+                                        <div class="d-flex justify-content-between w-100 actions-container">
+                                            <button mat-button  class="pointer" color="primary" (click)="onSelectingProject(project)" >
+                                                <mat-icon>start</mat-icon>
+                                                <br class="no-line"/>
+                                                <span class="x-small">Open</span>
+                                            </button>
+                                            <button mat-button  class="pointer" color="warn" (click)="onDeleteProject(project)">
+                                                <mat-icon>delete</mat-icon>
+                                                <br class="no-line"/>
+                                                <span class="x-small">Delete</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                            </mat-card>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+    
+    </div>
+</div>    
+
+<ng-template #loading>
+    <div class="w-100 text-center">
+        <h5 class="text-muted">
+            Loading...
+        </h5>
+    </div>
+</ng-template>
+<ng-template #error>
+    <div class="w-100 text-center">
+        <h4 class="text-muted">
+            Something went wrong
+        </h4>
+    </div>
+</ng-template>
+<ng-template #empty>
+    <div class="w-100 text-center">
+        <h4 class="text-muted">
+            No project yet.
+        </h4>
+    </div>
+</ng-template>

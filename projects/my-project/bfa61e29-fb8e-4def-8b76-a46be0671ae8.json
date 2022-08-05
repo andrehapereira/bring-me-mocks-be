@@ -1,0 +1,63 @@
+{
+    "id": "bfa61e29-fb8e-4def-8b76-a46be0671ae8",
+    "serviceName": "My service",
+    "mock": {
+        "urlPattern": "/api/my-service/endpoint",
+        "statusToReturn": 200,
+        "method": "GET",
+        "responses": [
+            {
+                "status": 200,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 201,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 302,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 400,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 401,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 403,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 404,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 500,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            }
+        ],
+        "headers": {
+            "my-header": "header",
+            "my-header2": "header2"
+        }
+    }
+}

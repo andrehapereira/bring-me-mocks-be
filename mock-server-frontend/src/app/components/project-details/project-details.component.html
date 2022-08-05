@@ -1,0 +1,55 @@
+<div class="p-4">
+    <ng-container *ngIf="project">
+        <div class="d-flex justify-content-between mb-3">
+            <button mat-button class="d-flex align-items-center pointer" (click)="onGoBack()">
+                <mat-icon>arrow_back</mat-icon>
+                <span class="ms-3">Go back</span>
+            </button>
+            
+            <button mat-raised-button color="primary" class="d-flex align-items-center pointer" (click)="addNewEndpoint()">
+                <mat-icon>add</mat-icon>
+                <span class="ms-3">Add new endpoint</span>
+            </button>
+        </div>
+        <mat-divider></mat-divider>
+    </ng-container>
+    <div class="mt-4">
+        <h3 class="text-center mb-4">{{project | uppercase}}</h3>
+        <ng-container *ngIf="!(isLoading$ | async); else loadingState">
+            <ng-container *ngIf="!(isEmpty$ | async); else emptyState">
+                <ng-container *ngFor="let group of endpointGroups | async">
+                    <div class="mt-4 d-block">
+                        <h3 class="text-muted">{{group.serviceName}}</h3>
+                        <ng-container *ngFor="let endpoint of group.items">
+                            <mat-card class="mb-3 w-100 d-flex align-items-center pointer" (click)="onSelectEndpoint(endpoint, group.serviceName)">
+                                <div class="badge {{btnClass(endpoint.method)}} me-3 px-2 py-1">
+                                    <small>{{endpoint.method}}</small>
+                                </div>
+                                <div class="text-muted">{{endpoint.urlPattern}}</div>
+                                <div class="text-danger ms-auto d-flex align-items-center pointer" (click)="onDelete(endpoint.id); $event.stopPropagation()">
+                                    <mat-icon>delete</mat-icon>
+                                </div>
+                            </mat-card>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+    </div>
+</div> 
+
+<ng-template #emptyState>
+    <div class="w-100 text-center">
+        <h4 class="text-muted">
+            This project has no endpoints yet.
+        </h4>
+    </div>
+</ng-template>
+
+<ng-template #loadingState>
+    <div class="w-100 text-center">
+        <h5 class="text-muted">
+            Loading...
+        </h5>
+    </div>
+</ng-template>

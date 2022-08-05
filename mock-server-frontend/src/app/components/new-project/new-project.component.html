@@ -1,0 +1,24 @@
+<div class="dialog">
+    <div class="dialog-header">
+        <h1>New Project</h1>
+    </div>
+    <div class="dialog-body">
+        <div [formGroup]="form">
+            <div>
+                <mat-form-field appearance="standard">
+                    <mat-label>Project Name</mat-label>
+                    <input matInput placeholder="Enter project name" formControlName="projectName">
+                    <mat-error *ngIf="invalidCtrl(form.get('projectName'))">
+                        <span *ngIf="form.get('projectName').hasError('required')">Field required.</span>
+                        <span *ngIf="form.get('projectName').hasError('pattern')">Only letters and "-" allowed.</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5 d-flex justify-content-end dialog-footer">
+        <button mat-button (click)="onClose()" class="me-3">Cancel</button>
+        <button mat-raised-button color="primary" (click)="onSave()" [disabled]="form.pristine || (loading$ | async)">Save</button>
+    </div>
+</div>
