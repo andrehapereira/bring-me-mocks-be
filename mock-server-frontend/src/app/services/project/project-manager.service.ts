@@ -29,14 +29,14 @@ export class ProjectManagerService {
 
   importProjects(file: File) {
     return defer(() => file.arrayBuffer()).pipe(
-      map(buffer => this.arrayBufferToBase64(buffer, file)),
+      map(buffer => this.arrayBufferToBase64(buffer)),
       switchMap(b64file => {
         return this.http.post(`${environment.apiRoot}/projects/import-project`, { data: b64file }, { observe: 'body'});
       })
     )
   }
 
-  private arrayBufferToBase64(buffer: ArrayBuffer, file): string {
+  private arrayBufferToBase64(buffer: ArrayBuffer): string {
     let binary = '';
     const bytes = new Uint8Array( buffer );
     const len = bytes.byteLength;

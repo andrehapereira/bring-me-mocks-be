@@ -1,9 +1,12 @@
 import { createAction, props } from "@ngrx/store";
 import { CreateEndpointPostBody, Endpoint } from "src/app/services/project/models/endpoints";
+import { ImportProjectsAction } from "../projects/projects.actions";
 
 export interface GetEndpointAction {
     projectName: string
 }
+
+export type ExportEndpointAction = GetEndpointAction;
 
 export interface GetEndpointsSuccessAction {
     data: Endpoint[]
@@ -17,6 +20,10 @@ export interface SaveEndpointAction {
 export interface DeleteEndpointAction {
     id: string,
     projectName: string
+}
+
+export interface ImportEndpointsAction extends ImportProjectsAction {
+    projectName: string;
 }
 
 export const GET_ENDPOINTS = createAction(
@@ -39,4 +46,18 @@ export const SAVE_ENDPOINT_DATA = createAction(
 export const DELETE_ENDPOINT = createAction(
     "DELETE_ENDPOINT",
     props<DeleteEndpointAction>()
+)
+
+export const END_ACTION = createAction(
+    "END_ACTION"
+)
+
+export const EXPORT_ENDPOINT = createAction(
+    "EXPORT_ENDPOINT",
+    props<ExportEndpointAction>()
+)
+
+export const IMPORT_ENDPOINT = createAction(
+    "IMPORT_ENDPOINT",
+    props<ImportEndpointsAction>()
 )

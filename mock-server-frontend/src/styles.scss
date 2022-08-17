@@ -1,3 +1,4 @@
+@use "@angular/material" as mat;
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
@@ -7,6 +8,93 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import '~bootstrap/scss/bootstrap';
 
 @import '~jsoneditor/dist/jsoneditor.min.css';
+
+//CUSTOM MATERIAL THEME
+
+// src/styles.scss
+
+
+@include mat.core();
+
+$bring-palette: (
+    50: #fdeaee,
+    100: #fbcbd3,
+    200: #e9979c,
+    300: #dd6e76,
+    400: #e74c55,
+    500: #ec393d,
+    600: #dd2f3b,
+    700: #cb2535,
+    800: #BE1E2D,
+    900: #af1023,
+    
+    contrast: (
+      50: #1e1e1e,
+      100: #1e1e1e,
+      200: #1e1e1e,
+      300: #1e1e1e,
+      400: white,
+      500: white,
+      600: white,
+      700: white,
+      800: white,
+      900: white,
+    )
+   );
+
+$bring-palette-secondary: (
+    50: #f9f9f9,
+    100: #f3f3f3,
+    200: #ebebeb,
+    300: #dcdcdc,
+    400: #b9b9b9,
+    500: #999999,
+    600: #717171,
+    700: #5d5d5d,
+    800: #3e3e3e,
+    900: #1e1e1e,
+
+    contrast: (
+        50: #1e1e1e,
+        100: #1e1e1e,
+        200: #1e1e1e,
+        300: #1e1e1e,
+        400: #1e1e1e,
+        500: #1e1e1e,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+    )
+);
+$my-app-primary: mat.define-palette($bring-palette, 800);
+$my-app-accent: mat.define-palette($bring-palette-secondary, 700);
+$my-app-warn: mat.define-palette(mat.$red-palette);
+
+$my-app-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-app-primary,
+      accent: $my-app-accent,
+      warn: $my-app-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($my-app-theme);
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+
+//CUSTOM
 
 .pointer {
     cursor: pointer;

@@ -5,11 +5,22 @@
                 <mat-icon>arrow_back</mat-icon>
                 <span class="ms-3">Go back</span>
             </button>
+            <div class="d-flex align-items-center">
+                <button mat-raised-button color="primary" class="d-flex align-items-center pointer" (click)="addNewEndpoint()">
+                    <mat-icon>add</mat-icon>
+                    <span class="ms-3">Add new endpoint</span>
+                </button>
+                <button mat-button color="accent" class="d-flex align-items-center pointer ms-4" (click)="importEndpoints()">
+                    <mat-icon>file_upload</mat-icon>
+                    <span class="ms-2">Import endpoints</span>
+                </button>
+                <input #uploadEndpointBtn type="file" class="d-none" (change)="onFileUpload()" accept=".json"/>
+                <button mat-button color="secondary" class="d-flex align-items-center pointer ms-4" (click)="exportEndpoints()">
+                    <mat-icon>file_download</mat-icon>
+                    <span class="ms-2">Export endpoints</span>
+                </button>
+            </div>
             
-            <button mat-raised-button color="primary" class="d-flex align-items-center pointer" (click)="addNewEndpoint()">
-                <mat-icon>add</mat-icon>
-                <span class="ms-3">Add new endpoint</span>
-            </button>
         </div>
         <mat-divider></mat-divider>
     </ng-container>

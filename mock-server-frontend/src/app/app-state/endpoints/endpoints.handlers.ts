@@ -28,3 +28,9 @@ export const handleDeleteEndpoint = (state: EndpointsState) => ({
     ...state,
     isLoading: true
 })
+
+export const handleEndAction = (state: EndpointsState) => ({
+    ...state,
+    isLoading: false,
+    hasError: false
+})

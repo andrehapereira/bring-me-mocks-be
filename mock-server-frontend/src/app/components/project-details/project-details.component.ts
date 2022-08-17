@@ -1,11 +1,11 @@
-import { OnDestroy } from '@angular/core';
+import { ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { map, reduce, takeUntil, tap } from 'rxjs/operators';
-import { DELETE_ENDPOINT, GET_ENDPOINTS } from 'src/app/app-state/endpoints/endpoints.actions';
+import { DELETE_ENDPOINT, EXPORT_ENDPOINT, GET_ENDPOINTS, IMPORT_ENDPOINT } from 'src/app/app-state/endpoints/endpoints.actions';
 import { endpointsList, isGettingEndpoints, noEndpoints } from 'src/app/app-state/endpoints/endpoints.selectors';
 import { EndpointItem } from 'src/app/services/project/models/endpoints';
 import { EndpointManagerService } from '../../services/project/endpoint-manager.service';
@@ -18,6 +18,9 @@ import { EditEndpointComponent } from '../edit-endpoint/edit-endpoint.component'
   styleUrls: ['./project-details.component.scss']
 })
 export class ProjectDetailsComponent implements OnInit, OnDestroy {
+
+  @ViewChild('uploadEndpointBtn', { static: false, read: ElementRef })
+  uploadBtn: ElementRef;
 
   project = '';
 
@@ -119,6 +122,22 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
           this.store.dispatch(DELETE_ENDPOINT({ projectName: this.project, id }))
         }
       })
+  }
+
+  importEndpoints() {
+    this.uploadBtn?.nativeElement.click();
+  }
+
+  exportEndpoints() {
+    this.store.dispatch(EXPORT_ENDPOINT({ projectName: this.project }));
+  }
+
+  onFileUpload() {
+    const file: File = this.uploadBtn.nativeElement.files?.item(0);
+    if (file) {
+      this.store.dispatch(IMPORT_ENDPOINT({ file, projectName: this.project }))
+    }
+    this.uploadBtn.nativeElement.value = '';
   }
 
   ngOnDestroy(): void {

@@ -76,6 +76,10 @@ export class MocksManager {
         return !!storedMocks.find(item => item.mock.urlPattern === mockToStore.urlPattern && item.mock.method === mockToStore.method);
     }
 
+    public alreadyExistsItem(storedMocks, mockToStore) {
+        return storedMocks.find(item => item.mock.urlPattern === mockToStore.urlPattern && item.mock.method === mockToStore.method);
+    }
+
     private getAllFilesFromDir() {
         return async source => (await fs.promises.readdir(source, { withFileTypes: true }))
         .filter(dirent => dirent.isFile())

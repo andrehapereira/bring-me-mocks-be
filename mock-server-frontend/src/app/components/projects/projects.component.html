@@ -8,12 +8,12 @@
             </button>
             <button mat-button color="accent" class="d-flex align-items-center pointer ms-4" (click)="import()">
                 <mat-icon>file_upload</mat-icon>
-                <span class="ms-2">Import</span>
+                <span class="ms-2">Import projects</span>
             </button>
             <input #uploadBtn type="file" class="d-none" (change)="onFileUpload()" accept=".json"/>
             <button mat-button color="secondary" class="d-flex align-items-center pointer ms-4" (click)="exportAll()">
                 <mat-icon>file_download</mat-icon>
-                <span class="ms-2">Export all</span>
+                <span class="ms-2">Export projects</span>
             </button>
         </div>
     </div>
@@ -35,7 +35,7 @@
                                                 <br class="no-line"/>
                                                 <span class="x-small">Open</span>
                                             </button>
-                                            <button mat-button  class="pointer" color="warn" (click)="onDeleteProject(project)">
+                                            <button mat-button  class="pointer" color="accent" (click)="onDeleteProject(project)">
                                                 <mat-icon>delete</mat-icon>
                                                 <br class="no-line"/>
                                                 <span class="x-small">Delete</span>

@@ -50,7 +50,6 @@ export class ProjectsComponent implements OnInit {
   }
 
   import() {
-    console.log(this.uploadBtn.nativeElement)
     this.uploadBtn?.nativeElement.click();
   }
 
