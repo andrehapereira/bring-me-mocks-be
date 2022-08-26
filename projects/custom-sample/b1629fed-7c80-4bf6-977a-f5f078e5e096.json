@@ -1,0 +1,67 @@
+{
+    "id": "b1629fed-7c80-4bf6-977a-f5f078e5e096",
+    "serviceName": "Projects",
+    "mock": {
+        "urlPattern": "/api/v1/projects",
+        "statusToReturn": 201,
+        "method": "POST",
+        "responses": [
+            {
+                "status": 200,
+                "body": {
+                    "id": 5,
+                    "name": "Test",
+                    "description": "asdasdçlaopsdp",
+                    "startDate": "2022-08-18"
+                }
+            },
+            {
+                "status": 201,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 302,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 400,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 401,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 403,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 404,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 500,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            }
+        ],
+        "connector": {
+            "action": "ADD",
+            "target": "d715de51-8b97-47c0-975a-1a0c2341fb97",
+            "by": null
+        }
+    }
+}

@@ -1,0 +1,81 @@
+{
+    "id": "d715de51-8b97-47c0-975a-1a0c2341fb97",
+    "serviceName": "Projects",
+    "mock": {
+        "urlPattern": "/api/v1/projects",
+        "statusToReturn": 200,
+        "method": "GET",
+        "responses": [
+            {
+                "status": 200,
+                "body": [
+                    {
+                        "id": 1,
+                        "name": "custom dev",
+                        "description": "Custom Development Initiative",
+                        "startDate": "2022-02-01"
+                    },
+                    {
+                        "id": 2,
+                        "name": "custom dev",
+                        "description": "Custom Development Initiative",
+                        "startDate": "2022-02-01"
+                    },
+                    {
+                        "startDate": "2022-08-19T15:32:25.392Z",
+                        "name": "Project8",
+                        "description": "Project Description",
+                        "id": "3e4b07e3-5741-49dd-939b-556b2287faaa"
+                    }
+                ]
+            },
+            {
+                "status": 201,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 302,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 400,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 401,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 403,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 404,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 500,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            }
+        ],
+        "connector": {
+            "action": null,
+            "target": null,
+            "by": null
+        }
+    }
+}

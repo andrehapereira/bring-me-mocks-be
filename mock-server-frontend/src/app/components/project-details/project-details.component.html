@@ -37,8 +37,9 @@
                                     <small>{{endpoint.method}}</small>
                                 </div>
                                 <div class="text-muted">{{endpoint.urlPattern}}</div>
-                                <div class="text-danger ms-auto d-flex align-items-center pointer" (click)="onDelete(endpoint.id); $event.stopPropagation()">
-                                    <mat-icon>delete</mat-icon>
+                                <div class="ms-auto d-flex align-items-center pointer">
+                                    <div class="d-flex flex-column justify-content-center align-items-center text-success x-small me-5" *ngIf="endpoint.connector.action && endpoint.connector.target"><mat-icon>link</mat-icon> Connected</div>
+                                    <div class="pointer text-danger" (click)="onDelete(endpoint.id); $event.stopPropagation()"><mat-icon>delete</mat-icon></div>
                                 </div>
                             </mat-card>
                         </ng-container>

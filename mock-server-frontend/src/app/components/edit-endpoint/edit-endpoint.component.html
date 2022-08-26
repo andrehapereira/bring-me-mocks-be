@@ -81,13 +81,60 @@
                   
             </div>
 
+            <div class="mb-4">
+                <mat-accordion>
+                    <mat-expansion-panel (opened)="connectorPanelOpen = true"
+                                         (closed)="connectorPanelOpen = false">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Connect to another service (optional)
+                        </mat-panel-title>
+                        <mat-panel-description *ngIf="hasConnector()">
+                          {{connectorActionLabel()}} {{connectorUrlPattern() | async}} <span *ngIf="connectorRequiresProperty()">&nbsp;by "{{form.get('connector.by')?.value || 'id'}}"</span>
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      
+                      <div class="d-flex w-100 align-items-center" [formGroup]="form.get('connector')">
+                            <div class="d-flex flex-wrap w-100">
+                                <mat-form-field appearance="standard" class="w-25 pe-3">
+                                    <mat-label>Action</mat-label>
+                                    <mat-select formControlName="action">
+                                        <mat-option *ngFor="let item of connectorActions" [value]="item.action">{{item.label}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field appearance="standard" class="w-75 ">
+                                    <mat-label>Target</mat-label>
+                                    <mat-select formControlName="target">
+                                        <mat-option *ngFor="let endpoint of endpoints$ | async" [value]="endpoint.id">
+                                            <div class="badge {{btnClass(endpoint.method)}} me-3 px-2 py-1">
+                                                <small>{{endpoint.method}}</small>
+                                            </div>
+                                            {{endpoint.urlPattern}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field appearance="standard" class="w-50" *ngIf="connectorRequiresProperty()">
+                                    <mat-label>By (defaults to 'id')</mat-label>
+                                    <input matInput formControlName="by">
+                                </mat-form-field>
+                                <div class="w-100 d-flex align-self-center justify-self-end">
+                                    <button mat-button color="primary" class="ms-auto" (click)="form.get('connector')?.reset(); form.markAsDirty()"><mat-icon>refresh</mat-icon><span>Reset</span></button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </mat-expansion-panel>
+                  </mat-accordion>
+
+            </div>
+
             <div class="responses">
                 <mat-tab-group (selectedTabChange)="onTabChange($event)">
                     <mat-tab #tab *ngFor="let status of getAvailableStatus()" [label]="status">
-                        </mat-tab>
-                    </mat-tab-group>              
-                    <json-editor [options]="jsonEditorOpts" [formControl]="activeJSONCtrl$ | async"></json-editor>
+                    </mat-tab>
+                </mat-tab-group>              
+                <json-editor [options]="jsonEditorOpts" [formControl]="activeJSONCtrl$ | async"></json-editor>
             </div>
+
         </div>
     </div>
 

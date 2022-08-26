@@ -1,0 +1,67 @@
+{
+    "id": "a8d202f9-83fc-43d5-a4ba-c5a2eddab117",
+    "serviceName": "Projects",
+    "mock": {
+        "urlPattern": "/api/v1/projects/:id",
+        "statusToReturn": 200,
+        "method": "GET",
+        "responses": [
+            {
+                "status": 200,
+                "body": {
+                    "id": 1,
+                    "name": "custom dev",
+                    "description": "Custom Development Initiative",
+                    "startDate": "2022-02-01"
+                }
+            },
+            {
+                "status": 201,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 302,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 400,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 401,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 403,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 404,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 500,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            }
+        ],
+        "connector": {
+            "action": "GET",
+            "target": "d715de51-8b97-47c0-975a-1a0c2341fb97",
+            "by": null
+        }
+    }
+}

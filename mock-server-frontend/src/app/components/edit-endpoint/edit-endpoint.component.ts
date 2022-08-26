@@ -1,18 +1,28 @@
 import { DEFAULT_DIALOG_CONFIG, DialogConfig, DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { AfterViewInit, Component, Inject, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CreateEndpointPostBody, EndpointItem, Methods, MocksItemResponse, Status, StatusAsArray } from 'src/app/services/project/models/endpoints';
+import { ConnectorActions, CreateEndpointPostBody, EndpointItem, Methods, MocksItemResponse, Status, StatusAsArray } from 'src/app/services/project/models/endpoints';
 import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor';
 import { BehaviorSubject } from 'rxjs';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatTableDataSource } from '@angular/material/table';
 import { v4 as id } from 'uuid';
 import { EndpointManagerService } from 'src/app/services/project/endpoint-manager.service';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, filter, map, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { GET_ENDPOINTS, SAVE_ENDPOINT_DATA } from 'src/app/app-state/endpoints/endpoints.actions';
 import { EndpointsEffects } from 'src/app/app-state/endpoints/endpoints.effects';
-import { isGettingEndpoints } from 'src/app/app-state/endpoints/endpoints.selectors';
+import { endpointsList, isGettingEndpoints } from 'src/app/app-state/endpoints/endpoints.selectors';
+
+interface EndpointForm {
+  urlPattern: FormControl,
+  serviceName: FormControl,
+  statusToReturn: FormControl,
+  method: FormControl,
+  headers: FormArray<FormGroup>,
+  connector: FormGroup<{ action: FormControl, target: FormControl, by: FormControl}>
+  [key: string]: FormControl | FormArray | FormGroup
+}
 
 @Component({
   selector: 'fe-edit-endpoint',
@@ -29,12 +39,42 @@ export class EditEndpointComponent implements OnInit {
   jsonEditor!: JsonEditorComponent
   jsonEditorOpts = new JsonEditorOptions();
 
-  form = this.fb.group<{ [key: string]: FormControl | FormArray}>({
+  connectorPanelOpen = false;
+
+  connectorActions = [
+    {
+      action: ConnectorActions.SEARCH,
+      label: 'Search in'
+    },  
+    {
+      action: ConnectorActions.GET,
+      label: 'Get from'
+    },
+    {
+      action: ConnectorActions.ADD,
+      label: 'Add to'
+    },
+    {
+      action: ConnectorActions.DELETE,
+      label: 'Remove from'
+    },
+    {
+      action: ConnectorActions.UPDATE,
+      label: 'Update'
+    }
+  ];
+
+  form = this.fb.group<EndpointForm>({
     urlPattern: this.fb.control('', [Validators.required]),
     serviceName: this.fb.control('', [Validators.required]),
     statusToReturn: this.fb.control(Status.INTERNAL_SERVER_ERROR, [Validators.required]),
     method: this.fb.control('', [Validators.required]),
-    headers: this.fb.array<FormGroup>([])
+    headers: this.fb.array<FormGroup>([]),
+    connector: this.fb.group({
+      action: this.fb.control(null),
+      target: this.fb.control(null),
+      by: this.fb.control(null)
+    })
   })
 
   headerTable = [
@@ -61,6 +101,11 @@ export class EditEndpointComponent implements OnInit {
   activeJSONCtrl$ = new BehaviorSubject<any>(null);
 
   endpoint: EndpointItem;
+  endpoints$ = this.store.pipe(
+    select(endpointsList), 
+    map(endpoints => endpoints.map(endpoint => endpoint.items)),
+    map((endpoints: Array<EndpointItem[]>) => (endpoints as any).flat()),
+  );
   serviceName: string;
   project: string;
 
@@ -100,6 +145,22 @@ export class EditEndpointComponent implements OnInit {
     .subscribe();
   }
 
+  connectorActionLabel() {
+    return this.connectorActions.find(item => item.action === this.form.value.connector.action)?.label;
+  }
+  
+  connectorUrlPattern() {
+    return this.endpoints$.pipe(map(endpoints => endpoints.find(endpoint => endpoint.id === this.form.value.connector.target)?.urlPattern));
+  }
+
+  hasConnector() {
+    return this.form.value.connector.action && this.form.value.connector.target;
+  }
+
+  connectorRequiresProperty() {
+    return this.form.value.connector && (this.form.value.connector.action === ConnectorActions.DELETE || this.form.value.connector.action === ConnectorActions.UPDATE || this.form.value.connector.action === ConnectorActions.GET || this.form.value.connector.action === ConnectorActions.SEARCH);
+  }
+
   onClose() {
     this.dialogRef.close();
   }
@@ -128,6 +189,7 @@ export class EditEndpointComponent implements OnInit {
       urlPattern: this.endpoint.urlPattern,
       serviceName: this.serviceName,
       method: this.endpoint.method,
+      connector: this.endpoint.connector,
       statusToReturn: this.endpoint.statusToReturn || Status.INTERNAL_SERVER_ERROR,
       headers
     });
@@ -202,6 +264,7 @@ export class EditEndpointComponent implements OnInit {
         statusToReturn: formValue.statusToReturn,
         method: formValue.method,
         responses: this.statusToMocksItemResponse(),
+        connector: formValue.connector as any,
         ...(headers && { headers })
       }
     }
@@ -220,6 +283,21 @@ export class EditEndpointComponent implements OnInit {
       return ({ [header.header]: header.value });
     }).forEach(h => headersAsObj = { ...headersAsObj, ...h})
     return !!Object.keys(headersAsObj).length ? headersAsObj : null;
+  }
+
+  btnClass(method: string) {
+    switch(method) {
+      case 'GET':
+        return 'bg-success';
+      case 'POST':
+        return 'bg-warning';
+      case 'PUT':
+        return 'bg-info';
+      case 'DELETE':
+        return 'bg-danger';
+      default:
+        return 'bg-success';
+    }
   }
 
 }

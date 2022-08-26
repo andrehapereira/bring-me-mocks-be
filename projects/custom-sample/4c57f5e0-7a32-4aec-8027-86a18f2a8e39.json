@@ -1,0 +1,64 @@
+{
+    "id": "4c57f5e0-7a32-4aec-8027-86a18f2a8e39",
+    "serviceName": "Projects",
+    "mock": {
+        "urlPattern": "/api/v1/projects/:id",
+        "statusToReturn": 200,
+        "method": "PUT",
+        "responses": [
+            {
+                "status": 200,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 201,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 302,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 400,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 401,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 403,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 404,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 500,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            }
+        ],
+        "connector": {
+            "action": "UPDATE",
+            "target": "d715de51-8b97-47c0-975a-1a0c2341fb97",
+            "by": null
+        }
+    }
+}

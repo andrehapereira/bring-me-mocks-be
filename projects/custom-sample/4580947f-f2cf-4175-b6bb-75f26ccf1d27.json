@@ -1,22 +1,18 @@
 {
-    "id": "bfa61e29-fb8e-4def-8b76-a46be0671ae8",
-    "serviceName": "My service",
+    "id": "4580947f-f2cf-4175-b6bb-75f26ccf1d27",
+    "serviceName": "Projects",
     "mock": {
-        "urlPattern": "/api/my-service/endpoint",
-        "statusToReturn": 200,
-        "method": "GET",
+        "urlPattern": "/api/v1/projects/:id/team",
+        "statusToReturn": 201,
+        "method": "PUT",
         "responses": [
             {
                 "status": 200,
-                "body": {
-                    "message": "No response provided yet."
-                }
+                "body": []
             },
             {
                 "status": 201,
-                "body": {
-                    "message": "No response provided yet."
-                }
+                "body": []
             },
             {
                 "status": 302,
@@ -55,9 +51,10 @@
                 }
             }
         ],
-        "headers": {
-            "my-header": "header",
-            "my-header2": "header2"
+        "connector": {
+            "action": null,
+            "target": null,
+            "by": null
         }
     }
 }

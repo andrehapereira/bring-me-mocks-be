@@ -18,7 +18,7 @@ export class Server {
     }
     
 
-    constructor(private PORT: number) {
+    constructor(private PORT: string) {
         this._app = express();
         this.projectManager = new ProjectManager(this._app, this.API_ROOT);
         this.mocksManager = new MocksManager();
@@ -28,7 +28,7 @@ export class Server {
         this._app.listen(this.PORT, () => {
             console.log('LISTENING AT: ', this.PORT)
         })
-        this._app.use(express.json());
+        this._app.use(express.json({limit: '50mb'}));
         this._app.use(cors({origin: '*'}));
         this._app.use((req, res, next) => {
             Object.entries(this.defaultHeaders).forEach(([header, value]) => {

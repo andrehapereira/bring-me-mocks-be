@@ -9,6 +9,7 @@ export interface EndpointItem {
     method: string,
     statusToReturn: number,
     headers?: { [key: string]: string }
+    connector?: { action: ConnectorActions, target: string, by: string },
     responses: any[]
 }
 
@@ -23,12 +24,21 @@ export interface Mock<T> {
     method: string;
     statusToReturn: number,
     headers?: { [key: string]: string }
+    connector?: { action: ConnectorActions, target: string, by: string }
     responses: Array<MocksItemResponse<T>>;
 }
 
 export interface MocksItemResponse<T> {
     status: number;
     body?: T;
+}
+
+export enum ConnectorActions {
+    GET = 'GET',
+    UPDATE = 'UPDATE',
+    ADD = 'ADD',
+    DELETE = 'DELETE',
+    SEARCH = 'SEARCH'
 }
 
 export const Status = {

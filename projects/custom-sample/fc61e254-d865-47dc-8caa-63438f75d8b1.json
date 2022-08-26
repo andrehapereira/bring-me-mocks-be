@@ -1,0 +1,62 @@
+{
+    "id": "fc61e254-d865-47dc-8caa-63438f75d8b1",
+    "serviceName": "Search",
+    "mock": {
+        "urlPattern": "/api/v1/search",
+        "statusToReturn": 200,
+        "method": "GET",
+        "responses": [
+            {
+                "status": 200,
+                "body": []
+            },
+            {
+                "status": 201,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 302,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 400,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 401,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 403,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 404,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 500,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            }
+        ],
+        "connector": {
+            "action": "SEARCH",
+            "target": "fc58b1bb-7050-49b2-a9b0-7c47a0442448",
+            "by": "name"
+        }
+    }
+}

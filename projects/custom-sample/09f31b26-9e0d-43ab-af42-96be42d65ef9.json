@@ -1,0 +1,64 @@
+{
+    "id": "09f31b26-9e0d-43ab-af42-96be42d65ef9",
+    "serviceName": "Employees",
+    "mock": {
+        "urlPattern": "/api/v1/employees/:id",
+        "statusToReturn": 200,
+        "method": "PUT",
+        "responses": [
+            {
+                "status": 200,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 201,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 302,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 400,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 401,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 403,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 404,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 500,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            }
+        ],
+        "connector": {
+            "action": "UPDATE",
+            "target": "fc58b1bb-7050-49b2-a9b0-7c47a0442448",
+            "by": null
+        }
+    }
+}

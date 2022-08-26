@@ -31,7 +31,8 @@ import { MatTableModule } from '@angular/material/table';
     MatTabsModule,
     MatExpansionModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    MatExpansionModule
   ],
   exports: [
     MatCardModule,
@@ -46,7 +47,8 @@ import { MatTableModule } from '@angular/material/table';
     MatTabsModule,
     MatExpansionModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModule { }

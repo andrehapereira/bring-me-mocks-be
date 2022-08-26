@@ -22,7 +22,7 @@
     "@angular/platform-browser": "^14.0.6",
     "@angular/platform-browser-dynamic": "^14.0.6",
     "@angular/router": "^14.0.6",
-    "@ng-bootstrap/ng-bootstrap": "^12.1.2",
+    "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "@ngrx/effects": "^14.0.2",
     "@ngrx/store": "^14.0.2",
     "ang-jsoneditor": "^1.10.5",

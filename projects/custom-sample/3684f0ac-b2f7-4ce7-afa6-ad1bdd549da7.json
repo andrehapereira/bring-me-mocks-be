@@ -1,0 +1,64 @@
+{
+    "id": "3684f0ac-b2f7-4ce7-afa6-ad1bdd549da7",
+    "serviceName": "Projects",
+    "mock": {
+        "urlPattern": "/api/v1/projects/:id",
+        "statusToReturn": 201,
+        "method": "DELETE",
+        "responses": [
+            {
+                "status": 200,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 201,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 302,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 400,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 401,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 403,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 404,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            },
+            {
+                "status": 500,
+                "body": {
+                    "message": "No response provided yet."
+                }
+            }
+        ],
+        "connector": {
+            "action": "DELETE",
+            "target": "d715de51-8b97-47c0-975a-1a0c2341fb97",
+            "by": null
+        }
+    }
+}
