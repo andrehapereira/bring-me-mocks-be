@@ -92,7 +92,6 @@ export class MocksManager {
         if (mockResponse.status === 200 && Array.isArray(mockResponse.body)) {
             const id = req.body[property || 'id'] || req.query[property || 'id'] || req.params[property || 'id'];
             if (!id) return mockResponse;
-            console.log('here')
             mockResponse.body = mockResponse.body.filter(item => {
                 const searchQuery = this.asString(id).toLowerCase().trim();
                 const itemDataAsString = this.asString(item[property || 'id']).toLowerCase().trim();

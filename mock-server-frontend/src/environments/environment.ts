@@ -2,10 +2,19 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { ENV } from "src/app/app.component";
+
+const env: ENV = (window as any).bmm?.config;
+
+const API_PROTOCOL = env.apiProtocol || 'http';
+const API_DOMAIN = env.apiDomain || 'localhost';
+const API_PORT = env.apiPort || '8085'
+
 export const environment = {
   production: false,
-  apiRoot: 'http://localhost:8085/api'
+  apiRoot: `${API_PROTOCOL}://${API_DOMAIN}:${API_PORT}/api`
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

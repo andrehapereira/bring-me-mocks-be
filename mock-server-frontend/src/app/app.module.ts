@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppComponent, ENV } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -22,6 +22,7 @@ import { projectsReducer } from './app-state/projects/projects.reducer';
 import { ProjectsEffects } from './app-state/projects/projects.effects';
 import { NewProjectComponent } from './components/new-project/new-project.component';
 
+export const APP_CONFIG = new InjectionToken<ENV>("APP_CONFIG token");
 
 @NgModule({
   declarations: [
@@ -52,7 +53,12 @@ import { NewProjectComponent } from './components/new-project/new-project.compon
       ProjectsEffects
     ])
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_CONFIG,
+      useFactory: () => (window as any).bmm?.config
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
